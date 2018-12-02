@@ -1,0 +1,44 @@
+
+A4 How to Run Self-tests
+
+*** After updating to the new version, the self-tester should be easier to use now. Take a look at this if you're still having trouble. Note especially that you should run the self-tester from the a4 directory by cd'ing into your a4 directory and running ./self-tester/autorun.sh
+ 
+
+The self-tester did not quite run out of the box after I copied it to my "main" a4 directory. Here are the steps I go through to run them. 
+
+ 
+
+1.Copy the /u/csc369h/fall/pub/a4/a4-self-test directory into the a4 directory. 
+2.Take a look at the readme.txt file in the directory. 
+3.Rename a4-self-test directory to "self-tester".
+4.Create a folder with the name "images" in the a4 directory and copy all the images in /u/csc369h/fall/pub/a4/images into it. 
+5.Make sure "ext2_dump" executable is in the a4 directory. If it is not, copy it from /u/csc369h/fall/pub/a4. Also, you want to make everything before running the tests. 
+6.Go back to the a4 directory and run ./self-tester/autorun.sh
+ 
+
+Then you will have the results stored in ./self-tester/results directory which we can compare with the files in "solution-results". 
+
+ 
+
+This is the script I created to compare the dumps. It is for the moment crude and not very easy to use but at least it goes through the test cases. If everything is ok, it prints nothing. The first argument is the path to the "results" directory and the second argument is the path to the "solution-results" directory. 
+
+#!/usr/bin/bash
+
+results_dir=$1
+solution_dir=$2
+
+diff ${results_dir}/case1-cp.img.txt ${solution_dir}/case1-cp.img.txt
+diff ${results_dir}/case2-cp-large.img.txt ${solution_dir}/case2-cp-large.img.txt
+diff ${results_dir}/case3-cp-rm-dir.img.txt ${solution_dir}/case3-cp-rm-dir.img.txt
+diff ${results_dir}/case4-mkdir.img.txt ${solution_dir}/case4-mkdir.img.txt
+diff ${results_dir}/case5-mkdir-2.img.txt ${solution_dir}/case5-mkdir-2.img.txt
+diff ${results_dir}/case6-ln-hard.img.txt ${solution_dir}/case6-ln-hard.img.txt
+diff ${results_dir}/case7-ln-soft.img.txt ${solution_dir}/case7-ln-soft.img.txt
+diff ${results_dir}/case8-rm.img.txt ${solution_dir}/case8-rm.img.txt
+diff ${results_dir}/case9-rm-2.img.txt ${solution_dir}/case9-rm-2.img.txt
+diff ${results_dir}/case10-rm-3.img.txt ${solution_dir}/case10-rm-3.img.txt
+diff ${results_dir}/case11-rm-large.img.txt ${solution_dir}/case11-rm-large.img.txt
+diff ${results_dir}/case12-rs.img.txt ${solution_dir}/case12-rs.img.txt
+diff ${results_dir}/case13-rs-2.img.txt ${solution_dir}/case13-rs-2.img.txt
+diff ${results_dir}/case14-rs-large.img.txt ${solution_dir}/case14-rs-large.img.txt
+diff ${results_dir}/case15-checker.img.txt ${solution_dir}/case15-checker.img.txt
